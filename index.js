@@ -8,10 +8,39 @@ MercadoPago.configure({
 })
 
 app.get("/", (req,res) => {
-    res.send("Olá mundo!")
+    res.send("Olá mundo!" + Date.now())
 })
 
-app.get("/op")
+app.get("/pagar",async (req,res) => {
+
+    var id = "" + Date.now()
+    var emailDoPagador = "carlos@bandelli.com"
+
+    var dados = {
+        items: [
+            item = {
+                id: id,
+                title: "2x video games;3x camisas",
+                quantity: 1,
+                currency_id: 'BRL',
+                unit_price: parseFloat(150)
+            }
+        ],
+        payer:{
+            email: emailDoPagador
+        },
+        external_reference: id
+    }
+    try{
+        var pagamento = await MercadoPago.preferences.create(dados)
+        console.log(pagamento)
+        return res.redirect(pagamento.body.init_point)
+    }catch(err){
+        return res.send(err.message)
+    }
+
+
+})
 
 app.listen(3000,(req,res)=> {
     console.log("Servidor rodando!")

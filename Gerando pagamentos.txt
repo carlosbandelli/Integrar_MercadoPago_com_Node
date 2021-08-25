@@ -1,0 +1,121 @@
+Gerando pagamentos
+
+Quando nos gerarmos pagamento pelo mercado pago, criar um objeto json definendo o pagamento
+a primeiro informação dentro do Json é uma varial chamada items e dentro dessa variavel vamos 
+ter um array, e dentro desse array vamos passar uma chave, nomeada item que vai receber um objeto
+dentro desse objeto, nos vamos setar um id( esse id é muito importante, pois sme ele voce nos não vamos
+saber se foi pago ou não), o id tem que ser diferente para cada venda que voce fizer (Dua formas para fazer isso 
+1ª voce baixa um biblitoteca UUID, 2ª voce utiliza  a data/hora/minuto/segundo/milisegundo)
+vamos usar a data
+Essa variavel que id tem ser string então tem que transformar o resultado da data em string
+Alem do id tem qu passar a descrição dos produtos que á pessoa esta comprando
+tem a quantidade
+a moeda (que a pessoa vai pagar isso é importante no caso BRL) 
+e o preço e esse preço tem que ser em float numero decimal
+
+exemplo:
+N asua aplicação voce pode puxar por exemplo
+Formulario:
+voce faz req.body.preco e voce coloca isso em uma variavel chamada preço
+
+var preco = req.body.preco
+
+Banco de dados:
+
+var preco = banco.buscar.
+
+Preço baseado em quantidade:
+
+voce pode vir aqui pegar a quantidade, por exemplo se voce tiver vendo um produto só, pode puxar a quantidade aqui
+ var quantidade = req.body.quantidade
+e passar essa quantidade no objeto JSON
+
+Só que quando voce ta trabalahdno com multiplos produtos, tipo um carrinho de compras, é melhor colocar manualmente
+quantidade 1 e preço setar manualmente
+
+O preço voce precisa ser em float então se voce quiser passar um varialvel dentro do Objeto Json
+use a função parseFloat(preco)
+
+Apos isso voce ja setou o item que tu quer vender, se voce estiver trabalhando com banco de dados
+você tem que salvar esse id em algum lugar.
+
+ENtão vamos supor que voce tme um tabela la no seu banco de dados chamada pagaemntos
+e nessa tabela  voce vai ter lah alguma colunas
+voce vai ter o id // código// pagador
+por exemplo:
+o id é gerado automaticamento no banco de dados, e la na sua tabela do banco de dados
+voce vai ter que pegar o id que tu gera no objeto Json e armazenar
+e quem é o pagador? o pagador voce vai definir agora
+voce vai no objeto json e cria um campo chamado payer e vao abre um objeto
+e cria um campo nesse objeto chamado email. Esse email voce pode puxar da onde quiser
+do banco de daos da requisição não importa.
+no caso do exemplo vai ser fixo.
+ENtão quando tu gera um pagamento são duas coisa importatne o id eo e-mail
+Depois que gerar o pagador vamos abrir outro campo no json
+e vamos
+ter uma external_reference, ela é o campo que vamos consultar quando o mercado pago
+mandar para nos que o pgamento foi concluido, então é muito importante, essa campo tem o meu conteudo do id do item
+
+
+app.get("/pagar",(req,res) => {
+
+    var id = "" + Date.now()
+    var emailDoPagador = "carlos@gmail.com"
+
+    var dados = {
+        items: [
+            item = {
+                id: id,
+                description: "2x video games;3x camisas",
+                quantity: 1,
+                currency_id: 'BRL',
+                unit_price: parseFloat(150)
+            }
+        ],
+        payer:{
+            email: emialDoPagador
+        },
+        external_reference: id
+    }
+
+    
+})
+
+
+
+Agora é so gerar um pagamento basico vou gerar o pagamento de uma maneira asincrona
+utilizando async e await
+
+Vou criar uma variavel que vai receber um pagamento e é um pagamento assincro vou chamar uma biblioteca
+do mercado pago chamada preferences. create e dentro vou passar os nosso dados
+e ai ja vou redirecinar o usuario que gerou esse pagamento para o URL de checkout, onde qu eeu pego essa url de checkout
+ atravez do comando pagamento.body.init_point
+
+try{
+        var pagamento = await MercadoPago.preferences.create(dados)
+        console.log(pagamento)
+        return res.redirect(pagamento.body.init_point)
+    }catch(err){
+        return res.send(err.message)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
