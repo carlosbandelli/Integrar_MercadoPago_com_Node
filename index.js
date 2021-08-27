@@ -42,7 +42,30 @@ app.get("/pagar",async (req,res) => {
 })
 
 app.post("/not", (req,res) => {
-    console.log(req.query)
+   var id = req.query.id
+   setTimeout(() => {
+
+        var filtro = {
+            "oder.id": id
+        }
+
+        MercadoPago.payment.search({
+            qs: filtro
+        }).then(data => {
+            var pagamento = data.body.results[0]
+
+            if(pagamento != undefined){                
+                console.log(pagamento.external_reference)
+                console.log(pagamento.status)
+            }else{
+                console.log("Pagamento não existe")
+            }
+            
+        }).catch(err => {
+            console.log(err)
+        })
+
+   },20000)
     res.send("OK")
 })
 
