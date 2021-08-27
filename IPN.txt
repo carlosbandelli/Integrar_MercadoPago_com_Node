@@ -1,0 +1,12 @@
+Notificações IPN
+
+São uma do mercado pago de comunica com sua aplicação
+Então atraves das notificações vai consegui avisar uma aplicação s eum pagamento foi de fato concluido
+Isso inclui todos os tipos de pagamentos.
+O mercado pago vai mandar um notificação para sua aplicação, em uma URL que voce definir
+
+Requisitos Obrigatórios da rota:
+
+Tem que ser do tipo post
+e tem que retornar status code 200
+ 

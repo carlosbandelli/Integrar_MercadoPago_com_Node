@@ -1,0 +1,122 @@
+No linux da vm
+Para instalar o node precisamos ir no Site do Node > clicar em downloads > clicar em Installing Node.js via Package manager > Clicar em Debian and Ubuntu based Linux distributions
+> clicar em Node.js binary distributions
+Apartir disso voce vai ser redirecionado para uma pagina do github
+Nela voce vai até o Node.js v12.x:
+e onde ta escrito Ubuntu tem duas linhas
+A primeira linha voce vai baixar o Binario:
+
+Linha de comando: curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+Obs: Essa linha acima (ou comando ) voce copia e cola o console da VM ele vai rodar e vai baixar o ninario
+na maquina
+
+E a segunda linha que voce deve usar é onde instal o node eo NPM:
+
+Linha de comando: sudo apt-get install -y nodejs
+
+e assim voce instala o node, para chacar se ele esta instalado é usar o comando
+
+Linha de comando: node -v
+
+Baixando o arquivo no GitHub na maquina do servidor:
+
+Vai na pagina do arquivo do Github > clica em clone> copia o link do arquivo que vai te dar
+ Vá ate o console da VM e usa o comando
+ LInha de Comando: git clone https://github.com/carlosbandelli/Integrar_MercadoPago_com_Node.git
+
+Desse jeito
+
+Apos baixar o arquivo na Vm
+Usar o comando ls (para lsitar as pastas)
+e muda de pasta com o comando cd, ápos isso dar enter
+
+Exemplo:
+
+cd Integrar_MercadoPago_com_Node
+
+Feito isso usa o mando ls para lista as pastas dentro do Arquivo, apos isso use o comando NPM INSTALL
+
+Resolvendo o Problema, De não existir o arquivo Package.json
+
+Abre o VS code, rode a aplicação do mesmo no VS code, apos isso abra o terminal
+e rode o comando
+ 
+Linha de comando: npm init
+
+Apartir disso voce instala as dependecia(biliotecas) que tem na aplicação 
+Obs:  mesmo ja tendo instalado, instale dnvo as dependencias
+Feito isso Faço um push para o git hub
+usando o terminal para subir no Github
+Comando:
+
+git add .
+
+git commit -m "pack"( dentros das "" voce pode escrever qualquercosia, no caso escrite isso pq foi o que acrescentei)
+
+git push origin master.
+
+*Voltando Para o console da Vm*
+
+Para evitar qualquer problema eu vou deletar o arquivo da vm
+
+1º - No terminal da VM eu volta pra pasta raiz com o comando
+
+Linha de comando: cd ../
+
+2º - No terminal da VM usar o comando ls para listas as pastas
+
+Linhade comando: ls
+
+3º - No terminal da VM usar o comando para deletar a pasta
+
+Linha de comando: rm -r Integrar_MercadoPago_com_Node
+
+obs: Para se certificar usar o comando ls
+
+4º - Fazer o git clone novamente
+
+Linha de comando: git clone https://github.com/carlosbandelli/Integrar_MercadoPago_com_Node.git
+
+5º - Depois de baixar usar o comando ls
+
+6º - navegar ate a pasto do projeto
+
+Linha de comando: cd Integrar_MercadoPago_com_Node
+
+7º - usar o comando ls
+
+8º - usar o comando para instalar a bibliotecas
+
+linha de comando: npm install
+
+9 -  Agora é so rodar o projeto 
+
+Linha de comando: node index
+
+obs: Se voce quiser que o servido continue, não feche a aba do console web.
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
